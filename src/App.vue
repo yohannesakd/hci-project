@@ -1,8 +1,8 @@
 <template>
     <div>
-        <the-header></the-header>
-        <main class="bg-primary flex flex-col items-center pt-10">
-            <the-hero id="home"></the-hero>
+        <the-header class="z-20"></the-header>
+        <main class="flex flex-col pt-20">
+            <the-hero id="hero"></the-hero>
             <disc-section id="discoverability" class="bg-white"></disc-section>
             <feedback-section id="feedback"></feedback-section>
             <cm-section id="conceptual-model" class="bg-white"></cm-section>
@@ -43,12 +43,13 @@ export default {
         SignifiersSection,
         ConstraintsSection,
     },
+    data() {},
 }
 </script>
 
 <style>
 html {
-    scroll-behavior: smooth;
     @apply font-poppins;
+    scroll-behavior: smooth;
 }
 </style>
