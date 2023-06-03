@@ -1,6 +1,6 @@
 <template>
     <div class="w-full">
-        <div class="min-h-[100vh] text-white flex items-center justify-center">
+        <div class="min-h-[100vh] flex items-center justify-center">
             <h1 class="text-2xl">Mapping</h1>
         </div>
     </div>

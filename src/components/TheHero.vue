@@ -1,9 +1,6 @@
 <template>
     <section id="hero" class="bg-primary text-white relative overflow-x-hidden">
-        <div
-            id="hero-content"
-            class="flex items-center justify-normal w-10/12 mx-auto relative"
-        >
+        <div class="flex items-center justify-normal w-10/12 mx-auto relative">
             <div
                 id="hero_left"
                 class="flex flex-col justify-center ml-6 w-1/2 mr-8"
