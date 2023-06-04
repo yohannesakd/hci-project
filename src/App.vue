@@ -39,7 +39,14 @@ export default {
         SignifiersSection,
         ConstraintsSection,
     },
-    data() {},
+    data() {
+        return {}
+    },
+    methods: {
+        handleScroll() {
+            console.log(this.$refs)
+        },
+    },
 }
 </script>
 
