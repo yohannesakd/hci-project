@@ -36,7 +36,8 @@
                     class="w-1/2 flex justify-center items-start border-l-2 border-gray-300"
                 >
                     <form
-                        class="w-7/12 space-y-6 px-8 py-10 my-8 shadow rounded-lg border-2"
+                        class="w-7/12 space-y-6 px-8 py-10 my-8 shadow rounded-lg border-2 relative"
+                        :class="formSuccess ? 'border-green-500' : ''"
                     >
                         <h3 class="text-center text-4xl">Sign in Form</h3>
                         <button
@@ -47,7 +48,7 @@
                             <span>Sign in wth Google</span>
                         </button>
                         <div
-                            class="w-full rounded px-10 py-3 space-x-4 flex items-center justify-center transition hover:bg-gray-200 relative"
+                            class="w-full rounded px-10 py-3 space-x-4 flex items-center justify-center relative"
                         >
                             <div
                                 class="w-full border border-gray-300 absolute"
@@ -57,20 +58,50 @@
                             >
                         </div>
 
-                        <label for="email" class="flex flex-col gap-2">
-                            <span class="ml-2">Email Address</span>
-                            <input
-                                type="email"
-                                class="w-full border border-gray-300 rounded p-3 bg-transparent"
-                            />
-                        </label>
-                        <label for="password" class="flex flex-col gap-2">
-                            <span class="ml-2">Password</span>
-                            <input
-                                type="password"
-                                class="w-full border border-gray-300 rounded p-3 bg-transparent"
-                            />
-                        </label>
+                        <div>
+                            <label for="email" class="flex flex-col gap-2">
+                                <span class="ml-2">Email Address</span>
+                                <input
+                                    ref="emailInput"
+                                    type="email"
+                                    class="w-full border-2 outline-none focus:border-blue-500 rounded p-3 bg-transparent transition"
+                                    :class="{
+                                        'border-red-500 focus:border-red-500 animate-shake':
+                                            emailError,
+                                        'border-gray-300': emailError,
+                                        'border-green-500': formSuccess,
+                                    }"
+                                    v-model="emailAddress"
+                                    @blur="checkEmail"
+                                    @focus="clearEmailErrors()"
+                                />
+                            </label>
+                            <span class="text-red-500 ml-2 mt-1 block">{{
+                                emailErrorText
+                            }}</span>
+                        </div>
+                        <div>
+                            <label for="password" class="flex flex-col gap-2">
+                                <span class="ml-2">Password</span>
+                                <input
+                                    ref="passwordInput"
+                                    type="password"
+                                    class="w-full border-2 outline-none focus:border-blue-500 rounded p-3 bg-transparent"
+                                    :class="{
+                                        'border-red-500 focus:border-red-500 outline-none animate-shake':
+                                            passwordError,
+                                        'border-gray-300 ': passwordError,
+                                        'border-green-500': formSuccess,
+                                    }"
+                                    v-model="password"
+                                    @blur="checkPassword"
+                                    @focus="clearPasswordErrors()"
+                                />
+                            </label>
+                            <span class="text-red-500 ml-2 mt-1 block">{{
+                                passwordErrorText
+                            }}</span>
+                        </div>
 
                         <div class="flex justify-between px-2">
                             <label class="flex gap-2">
@@ -91,6 +122,7 @@
                         <button
                             type="button"
                             class="w-full border bg-blue-500 text-white rounded-lg text-lg px-10 py-3 space-x-4 text-center transition hover:bg-blue-700"
+                            @click="verifyInputs"
                         >
                             Sign in
                         </button>
@@ -103,9 +135,145 @@
                                 >Register</a
                             >
                         </div>
+                        <div
+                            class="absolute bg-gray-100 border w-48 grid place-items-center h-32 rounded-2xl -right-6 top-1/2 translate-x-full -translate-y-1/2 transition-opacity duration-1000"
+                            :class="{ 'opacity-0': !passwordAttempted }"
+                        >
+                            <svg
+                                width="36"
+                                height="28"
+                                viewBox="0 0 9 7"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="rotate-[-120deg] absolute left-0 top-1/2 -translate-x-3.5 -translate-y-1/2"
+                            >
+                                <path
+                                    d="M5.24613 2.78516C3.87296 3.03338 1.98365 2.42755 0.828293 1.79227C3.13 1.71765 5.36767 1.09897 7.31062 0C6.83711 1.99842 7.31063 4.07677 8.01142 6.00366C6.8608 5.20429 5.58706 4.07677 5.24613 2.78516Z"
+                                    class="fill-gray-100"
+                                />
+                            </svg>
+
+                            <div class="italic text-sm">
+                                <h4 class="text-center mb-2">Hint</h4>
+                                <p>realemail@mail.com</p>
+                                <p>Password123</p>
+                                <button
+                                    type="button"
+                                    class="mx-auto block border border-gray-400 px-4 py-1 mt-2 rounded-lg transition hover:bg-gray-200"
+                                    @click="fillInputs"
+                                >
+                                    Click to fill
+                                </button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            emailAddress: "",
+            password: "",
+            emailError: false,
+            passwordError: false,
+            emailErrorText: "",
+            passwordErrorText: "",
+            formSuccess: false,
+            validEmail: "realemail@mail.com",
+            validPassword: "Password123",
+            passwordAttempted: false,
+            animationClass: false,
+        }
+    },
+    methods: {
+        checkEmail() {
+            let emailRegex =
+                /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+            if (!this.emailAddress.length) {
+                this.emailError = true
+                this.emailErrorText = "Email is Required!"
+                return false
+            } else if (!emailRegex.test(this.emailAddress)) {
+                this.emailError = true
+                this.emailErrorText = "Enter a proper Email Address!"
+                return false
+            } else return true
+        },
+        checkPassword() {
+            if (!this.password.length) {
+                this.passwordError = true
+                this.passwordErrorText = "Password is Required!"
+                return false
+            } else return true
+        },
+        clearEmailErrors() {
+            this.emailError = false
+            this.emailErrorText = ""
+        },
+        clearPasswordErrors() {
+            this.passwordError = false
+            this.passwordErrorText = ""
+        },
+        verifyInputs() {
+            let emailerr = this.checkEmail()
+            let passerr = this.checkPassword()
+
+            if (emailerr && passerr) {
+                if (
+                    this.emailAddress == this.validEmail &&
+                    this.password == this.validPassword
+                ) {
+                    this.formSuccess = true
+                    this.clearEmailErrors()
+                    this.clearPasswordErrors()
+                } else {
+                    this.emailErrorText = "Invalid Credentials"
+                    this.emailError = true
+                    this.passwordErrorText = "Invalid Credentials"
+                    this.passwordError = true
+
+                    if (!this.passwordAttempted) this.passwordAttempted = true
+                }
+            }
+        },
+        fillInputs() {
+            this.emailAddress = this.validEmail
+            this.password = this.validPassword
+            this.passwordAttempted = false
+        },
+    },
+}
+</script>
+
+<style scoped>
+.animate-shake {
+    animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes shake {
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+</style>
