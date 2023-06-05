@@ -27,10 +27,15 @@
                         password, or a message that says "account locked" if the
                         user has made too many incorrect attempts.
                     </p>
-                    <p>
-                        Play with this sign-in form to gain better
-                        understanding.
-                    </p>
+                    <div class="mt-4 italic font-semibold flex items-center">
+                        <div>
+                            Play with this sign-in form to gain better
+                            understanding.
+                        </div>
+                        <arrow-right
+                            class="h-8 w-10 animate-point"
+                        ></arrow-right>
+                    </div>
                 </div>
                 <div
                     class="w-1/2 flex justify-center items-start border-l-2 border-gray-300"
@@ -42,7 +47,7 @@
                         <h3 class="text-center text-4xl">Sign in Form</h3>
                         <button
                             type="button"
-                            class="w-full border border-gray-300 rounded px-10 py-3 space-x-4 flex items-center justify-center transition hover:bg-gray-200"
+                            class="w-full border border-gray-300 rounded px-10 py-3 space-x-4 flex items-center justify-center transition hover:bg-gray-100"
                         >
                             <img src="@/assets/images/icon-google.svg" />
                             <span>Sign in wth Google</span>
@@ -64,7 +69,7 @@
                                 <input
                                     ref="emailInput"
                                     type="email"
-                                    class="w-full border-2 outline-none focus:border-blue-500 rounded p-3 bg-transparent transition"
+                                    class="w-full border-2 outline-none focus:border-blue-500 rounded p-3 bg-transparent transition hover:bg-gray-100"
                                     :class="{
                                         'border-red-500 focus:border-red-500 animate-shake':
                                             emailError,
@@ -86,7 +91,7 @@
                                 <input
                                     ref="passwordInput"
                                     type="password"
-                                    class="w-full border-2 outline-none focus:border-blue-500 rounded p-3 bg-transparent"
+                                    class="w-full border-2 outline-none focus:border-blue-500 rounded p-3 bg-transparent transition hover:bg-gray-100"
                                     :class="{
                                         'border-red-500 focus:border-red-500 outline-none animate-shake':
                                             passwordError,
@@ -254,6 +259,9 @@ export default {
 .animate-shake {
     animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
+.animate-point {
+    animation: point 1.5s ease-in-out both infinite;
+}
 @keyframes shake {
     10%,
     90% {
@@ -274,6 +282,21 @@ export default {
     40%,
     60% {
         transform: translate3d(4px, 0, 0);
+    }
+}
+@keyframes point {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateX(0);
+    }
+    40% {
+        transform: translateX(15px);
+    }
+    60% {
+        transform: translateX(7px);
     }
 }
 </style>
