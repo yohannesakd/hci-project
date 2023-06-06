@@ -51,7 +51,7 @@
                         <transition-group
                             name="list"
                             tag="ul"
-                            class="space-y-2 overflow-y-scroll max-h-80 overflow-x-hidden"
+                            class="space-y-2 overflow-y-auto max-h-80 overflow-x-hidden"
                             id="todoItems"
                         >
                             <li
