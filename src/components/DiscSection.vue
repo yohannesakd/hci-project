@@ -4,10 +4,6 @@
       class="min-h-[100vh] text-black lg:pt-36 pt-20 flex flex-col items-center relative"
     >
       <h2 class="text-3xl font-semibold text-center"> 1. Discoverability </h2>
-      <p class="text-center text-md mt-2">
-        User-generated content in real-time will have multiple touchpoints for
-        offshoring
-      </p>
 
       <div class="absolute right-[55%] top-24 w-[400px] h-64">
         <!-- <img
@@ -46,13 +42,6 @@
             :alt="concept.title.toLowerCase() + ' icon'"
           />
           <h4 class="text-xl">{{ concept.title }}</h4>
-          <p>
-            {{ concept.content }}
-          </p>
-          <a href="#" class="text-blue-500 flex gap-2 items-center"
-            ><span>Learn more</span>
-            <arrow-right class="w-5 h-5"></arrow-right>
-          </a>
         </div>
       </div>
 
@@ -94,20 +83,14 @@ export default {
         {
           icon: "icon-clear-labeling",
           title: "Clear Labeling",
-          content:
-            "Efficiently unleash cross-media information without cross-media value. Quickly timely deliverables for real-time schemas. ",
         },
         {
           icon: "icon-intuitive-navigation",
           title: "Intuitive Navigation",
-          content:
-            "Completely pursue scalable customer cross-media through potentialities. Holistically quickly installed portals. ",
         },
         {
           icon: "icon-navigation-cues",
           title: "Navigation Cues",
-          content:
-            "Objectively innovate empowered scalable manufactured products whereas parallel platforms predominate extensible. ",
         },
       ],
     };
