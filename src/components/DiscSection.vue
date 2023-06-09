@@ -19,7 +19,7 @@
         <curvy-arrow class="h-full w-full" :isVisible="isVisible"></curvy-arrow>
       </div>
 
-      <p class="text-center w-3/4 mt-40">
+      <p class="text-center w-3/4 mt-36">
         Discoverability refers to a product or system's ability to make its
         functions and features easily discoverable by users. It refers to the
         ease with which users can find and learn about the various features and
@@ -27,12 +27,12 @@
         features should be made to be easily detected by the users.
       </p>
 
-      <p class="mt-14">
+      <p class="mt-12">
         To apply Discoverability, Use the following concepts:
       </p>
 
       <div
-        class="flex gap-6 justify-between mt-14"
+        class="flex gap-6 justify-between mt-12"
         ref="discoverability-concepts"
       >
         <div
@@ -49,8 +49,33 @@
           <p>
             {{ concept.content }}
           </p>
+          <a href="#" class="text-blue-500 flex gap-2 items-center"
+            ><span>Learn more</span>
+            <arrow-right class="w-5 h-5"></arrow-right>
+          </a>
         </div>
       </div>
+
+      <a
+        class="px-6 py-3 border-none bg-button-primary text-white rounded-lg shadow-sm hover:shadow-xl hover:text-blue-100 transition-all flex max-w-fit items-center gap-2 mt-8"
+        href="#feedback"
+      >
+        <span>Next</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
+          />
+        </svg>
+      </a>
     </div>
   </div>
 </template>

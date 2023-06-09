@@ -13,9 +13,9 @@
                     practical and interactive way.
                 </p>
                 <div class="mt-4">
-                    <button
-                        type="button"
-                        class="px-6 py-3 border-none bg-button-primary text-blue-100 rounded-lg shadow-sm hover:shadow-2xl hover:text-white transition-all flex items-center gap-2"
+                    <a
+                        class="px-6 py-3 border-none bg-button-primary text-blue-100 rounded-lg shadow-sm hover:shadow-2xl hover:text-white transition-all flex max-w-fit items-center gap-2"
+                        href="#discoverability"
                     >
                         <span>Get Started</span>
                         <svg
@@ -32,7 +32,7 @@
                                 d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
                             />
                         </svg>
-                    </button>
+                    </a>
                 </div>
             </div>
             <div id="hero_right" class="w-1/2 relative z-10 min-h-full">
